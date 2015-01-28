@@ -10,9 +10,9 @@ from mfr.core import RenderResult, get_assets_from_list
 
 JS_ASSETS = [
     "js9support.min.js",
-    "js9plugins.js",
     "js9.min.js",
-    "fitsy.min.js"
+    "fitsy.min.js",
+    "js9plugins.js"
 ]
 
 CSS_ASSETS = [
@@ -25,11 +25,11 @@ TEMPLATE = os.path.join(HERE, 'templates', 'fits.html')
 
 
 def render_html(fp, src=None, **kwargs):
-
     src = src or fp.name
+    import pdb; pdb.set_trace()
 
     with open(TEMPLATE) as template:
-        content = template.read().format(fits_file=  '\'' + src + '\'')
+        content = template.read().format(file=src)
 
     assets_uri_base = '{0}/mfr_fits'.format(core_config['STATIC_URL'])
 
@@ -38,8 +38,4 @@ def render_html(fp, src=None, **kwargs):
         'css': get_assets_from_list(assets_uri_base, 'css', CSS_ASSETS)
     }
 
-    return RenderResult(content, assets)
-
-
-
-
+    return RenderResult(content , assets)
